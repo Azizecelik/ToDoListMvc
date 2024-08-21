@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ToDoListProject.Models.GorevlerInfo>
+
+<h2>Yapılacaklar Listesi</h2>
+
+<a class="btn btn-primary" asp-action="Create">Yeni Görev Ekle</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Görev Adı</th>
+            <th>Açıklama</th>
+            <th>Tarih</th>
+            <th>Görev Durumu</th>
+            <th>Eylemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.GorevDurumu ? "table-success" : "")">
+                <td>@item.Id</td>
+                <td>@item.GorevAdi</td>
+                <td>@item.Aciklama</td>
+                <td>@item.Tarih.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>
+                    <form asp-action="UpdateGorevDurumu" method="post">
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <input type="checkbox" name="durum" value="true" @(item.GorevDurumu ? "checked" : "") onclick="this.form.submit();" />
+                    </form>
+                </td>
+
+
+                <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+}
+

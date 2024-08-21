@@ -1,0 +1,17 @@
+﻿@model ToDoListProject.Models.GorevlerInfo
+
+<h2>Görevi Sil</h2>
+
+<h3>Bu görevi silmek istediğinize emin misiniz?</h3>
+<div>
+    <h4>Görev: @Model.GorevAdi</h4>
+    <p>Açıklama: @Model.Aciklama</p>
+    <p>Tarih: @Model.Tarih.ToString("dd/MM/yyyy HH:mm")</p>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger btn-sm">Sil</button>
+    <a href="@Url.Action("Index", "ToDo")" class="btn btn-secondary btn-sm">İptal</a>
+</form>

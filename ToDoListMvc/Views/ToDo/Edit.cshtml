@@ -1,0 +1,36 @@
+﻿@model ToDoListProject.Models.GorevlerInfo
+
+<h2>Düzenleme - Güncelleme</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@ViewBag.ErrorMessage</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+    </div>
+}
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="GorevAdi" class="form-label">Görev Adı</label>
+        <input asp-for="GorevAdi" class="form-control" />
+        <span asp-validation-for="GorevAdi" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Aciklama" class="form-label">Açıklama</label>
+        <input asp-for="Aciklama" class="form-control" />
+        <span asp-validation-for="Aciklama" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Tarih (Güncel tarih otomatik olarak ayarlanacak)</label>
+        <input type="datetime-local" class="form-control" id="Tarih" name="Tarih"
+               value="@Model.Tarih.ToString("yyyy-MM-ddTHH:mm")" readonly />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Görev Güncelle</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
